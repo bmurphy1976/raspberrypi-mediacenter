@@ -1,0 +1,32 @@
+---
+- name: omxplayer fetch
+  git: repo=https://github.com/popcornmix/omxplayer.git
+       dest=/src/omxplayer
+       depth=1
+       force=yes
+
+- name: omxplayer prepare
+  shell: ./prepare-native-raspbian.sh
+  args:
+    chdir: /src/omxplayer
+
+- name: omxplayer use system ffmpeg
+  shell: sed -i 's/^[^#].*cp -a ffmpeg_compiled.*/#\0/' Makefile
+  args:
+    chdir: /src/omxplayer
+
+- name: omxplayer build
+  shell: make
+  args:
+    chdir: /src/omxplayer
+    creates: /srv/omxplayer/omxplayer
+
+- name: omxplayer install
+  shell: cp /src/omxplayer/omxplayer /usr/local/bin/omxplayer && chmod 755 /usr/local/bin/omxplayer
+  args:
+    creates: /usr/local/bin/omxplayer
+
+- name: omxplayer install bin
+  shell: cp /src/omxplayer/omxplayer.bin /usr/local/bin/omxplayer.bin && chmod 755 /usr/local/bin/omxplayer.bin
+  args:
+    creates: /usr/local/bin/omxplayer.bin

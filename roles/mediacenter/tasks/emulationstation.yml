@@ -1,0 +1,23 @@
+---
+- name: emulationstation clone
+  git: repo=https://github.com/Aloshi/EmulationStation
+       dest=/src/emulationstation
+       depth=1
+
+- name: emulationstation configure
+  shell: cmake -DCMAKE_CXX_COMPILER=/usr/bin/g++-4.7 -DFREETYPE_INCLUDE_DIRS=/usr/include/freetype2/ .
+  args:
+    chdir: /src/emulationstation
+    creates: /src/emulationstation/Makefile
+
+- name: emulationstation build
+  shell: make
+  args:
+    chdir: /src/emulationstation
+    creates: /src/emulationstation/emulationstation
+
+- name: emulationstation install
+  shell: make install
+  args:
+    chdir: /src/emulationstation
+    creates: /usr/local/bin/emulationstation

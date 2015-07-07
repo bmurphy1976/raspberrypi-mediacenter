@@ -1,0 +1,17 @@
+---
+- name: libretro genesis_plus_gx fetch
+  shell: ./libretro-fetch.sh genesis_plus_gx
+  args:
+    chdir: /src/libretro-super
+    creates: /src/libretro-super/libretro-genesis_plus_gx
+
+- name: libretro genesis_plus_gx build
+  shell: ./libretro-build.sh genesis_plus_gx
+  args:
+    chdir: /src/libretro-super
+    creates: /src/libretro-super/libretro-genesis_plus_gx/genesis_plus_gx_libretro.so
+
+- name: libretro genesis_plus_gx install
+  shell: cp /src/libretro-super/libretro-genesis_plus_gx/genesis_plus_gx_libretro.so /usr/local/share/retroarch/emulators/genesis_plus_gx_libretro.so
+  args:
+    creates: /usr/local/share/retroarch/emulators/genesis_plus_gx_libretro.so

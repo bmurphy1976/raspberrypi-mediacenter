@@ -1,0 +1,40 @@
+---
+- name: packages uninstall
+  apt: state=absent pkg={{item}}
+  with_items:
+    - binutils
+    - build-essential
+    - cmake
+    - g++-4.7
+    - gcc-4.7
+    - git-core
+    - libasound2-dev
+    - libboost-date-time-dev
+    - libboost-filesystem-dev
+    - libboost-locale-dev
+    - libboost-system-dev
+    - libboost1.50-dev
+    - libcurl4-openssl-dev
+    - libdbus-1-dev
+    - libeigen3-dev
+    - libfreeimage-dev
+    - libfreetype6-dev
+    - libidn11-dev
+    - libpcre3-dev
+    - libsmbclient-dev
+    - libssh-dev
+    - libssl-dev
+    - libudev-dev
+    - libusb-1.0-0-dev
+    - libxml2-dev
+    - python3-dev
+    - subversion
+
+#- name: packages autoremove check
+#  command: apt-get --dry-run autoremove
+#  register: check_autoremove
+#  changed_when: False
+#
+#- name: packages autoremove invoke
+#  command: apt-get -y autoremove
+#  when: "'The following packages will be REMOVED' in check_autoremove.stdout"

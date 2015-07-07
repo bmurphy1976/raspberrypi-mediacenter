@@ -1,0 +1,11 @@
+---
+- include: init.yml
+- include: libSDL2.yml
+- include: libretro.yml
+- include: libretro-megadrive.yml
+- include: libretro-snes.yml
+- include: ffmpeg.yml
+- include: omxplayer.yml
+- include: emulationstation.yml
+- include: config.yml
+- include: cleanup.yml

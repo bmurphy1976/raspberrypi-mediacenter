@@ -1,0 +1,18 @@
+---
+- name: emulationstation config
+  file: owner=pi group=pi mode=755 state=directory dest=/home/pi/.emulationstation
+
+- name: emulationstation config input
+  copy: owner=pi group=pi mode=644 src=es_input.cfg dest=/home/pi/.emulationstation/es_input.cfg
+
+- name: emulationstation config settings
+  copy: owner=pi group=pi mode=644 src=es_settings.cfg dest=/home/pi/.emulationstation/es_settings.cfg
+
+- name: emulationstation config systems
+  copy: owner=pi group=pi mode=644 src=es_systems.cfg dest=/home/pi/.emulationstation/es_systems.cfg
+
+- name: emulationstation config joystick
+  copy: owner=pi group=pi mode=644 src=joystick-ps3-default.conf dest=/home/pi/.emulationstation/joystick-default.conf
+
+- name: emulationstation config joystick
+  copy: owner=pi group=pi mode=644 src=joystick-ps3-megadrive.conf dest=/home/pi/.emulationstation/joystick-megadrive.conf
