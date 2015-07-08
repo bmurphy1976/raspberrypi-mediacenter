@@ -50,7 +50,7 @@ your device, put them in the following locations:
 
 * Movies: `/home/pi/movies`
 * Sega Genesis Roms: `/home/pi/roms/genesis`
-* Super Nintendo Roms: `/home/pi/roms/movies`
+* Super Nintendo Roms: `/home/pi/roms/snes`
 
 ### TODO
 
