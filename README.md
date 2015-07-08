@@ -23,6 +23,7 @@ applications:
 * [EmulationStation](http://emulationstation.org/) is used for the user interface
 * [libretro](http://www.libretro.com/) provides the foundation for the included emulators
 * [Genesis Plus GX](https://github.com/ekeeke/Genesis-Plus-GX) is the included Sega Genesis emulator
+* [FCEUMM Nintendo Emulator](https://github.com/libretro/libretro-fceumm) is the included Nintendo Entertainment System emulator
 * [Snes9x Next](https://github.com/libretro/snes9x-next) is the included Super Nintendo emulator
 * [omxplayer](https://github.com/popcornmix/omxplayer) is used for video playback
 * The media center is pre-configured to support Sony Playstation 3 controllers by default
@@ -44,11 +45,12 @@ installed on your Raspberry Pi.
 ~/raspberrypi-mediacenter/$ ansible-playbook -i hosts -s site.yml --ask-pass
 ```
 
-Once installation has completed (it will about an hour), you can run the the media
+Once installation has completed (it will take about one hour), you can run the the media
 center by logging in as the `pi` user and running `emulationstation`.  To add media to
 your device, put them in the following locations:
 
 * Movies: `/home/pi/movies`
+* Nintendo: `/home/pi/roms/nes`
 * Sega Genesis Roms: `/home/pi/roms/genesis`
 * Super Nintendo Roms: `/home/pi/roms/snes`
 

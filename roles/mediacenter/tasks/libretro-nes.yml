@@ -1,0 +1,17 @@
+---
+- name: libretro fceumm fetch
+  shell: ./libretro-fetch.sh fceumm
+  args:
+    chdir: /src/libretro-super
+    creates: /src/libretro-super/libretro-fceumm
+
+- name: libretro fceumm build
+  shell: ./libretro-build.sh fceumm
+  args:
+    chdir: /src/libretro-super
+    creates: /src/libretro-super/libretro-fceumm/fceumm_libretro.so
+
+- name: libretro fceumm install
+  shell: cp /src/libretro-super/libretro-fceumm/fceumm_libretro.so /usr/local/share/retroarch/emulators/fceumm_libretro.so
+  args:
+    creates: /usr/local/share/retroarch/emulators/fceumm_libretro.so
