@@ -1,6 +1,6 @@
 ## Raspberry Pi Media Center
 
-This is a set of [Ansible](http://www.ansible.com/) scripts to install a _minimal_
+This is a set of bash scripts to install a _minimal_
 [Raspberry Pi](https://www.raspberrypi.org/) Media Center.  This is a lightweight
 alternative to complicated projects such as
 [RetroPie](http://blog.petrockblock.com/retropie/), [OpenElec](http://openelec.tv/),
@@ -32,40 +32,22 @@ applications:
 
 ### Installation
 
-Clone this repo on a machine (not the Raspberry Pi!) that has Ansible installed and
-then update the `raspberrypi-mediacenter/hosts` file to point to IP address of your
-Raspberry Pi.  You should already have an up-to-date
-[Raspbian Distribution](https://www.raspberrypi.org/documentation/installation/installing-images/)
-installed on your Raspberry Pi.
+Clone this repo onto the target device, then run the following command.  Make sure
+your device is running an up-to-date Raspbian image.
 
 ```bash
-~/$ git clone https://github.com/bmurphy1976/raspberrypi-mediacenter
-~/$ cd raspberrypi-mediacenter
-~/raspberrypi-mediacenter/$ vi hosts
-~/raspberrypi-mediacenter/$ ansible-playbook -i hosts -s site.yml --ask-pass
+$ git clone https://github.com/bmurphy1976/raspberrypi-mediacenter
+$ cd raspberrypi-mediacenter && ./raspberrypi-mediacenter-install
 ```
 
 Once installation has completed (it will take about one hour), you can run the the media
 center by logging in as the `pi` user and running `emulationstation`.  To add media to
-your device, put them in the following locations:
+your device, put files in the following locations:
 
 * Movies: `/home/pi/movies`
 * Nintendo: `/home/pi/roms/nes`
 * Sega Genesis Roms: `/home/pi/roms/genesis`
 * Super Nintendo Roms: `/home/pi/roms/snes`
-
-### TODO
-
-These are features planned for the short-term future:
-
-* disable terminal blanking
-* automate rpi-update
-* install default emulationstation theme
-* add nes emulator
-* add msx emulator
-* add mame emulator
-* optionally support auto start
-* optionally install plex media server
 
 ### License
 
