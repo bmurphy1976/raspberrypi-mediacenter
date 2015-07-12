@@ -363,7 +363,7 @@ fi
 # M.A.M.E.
 #############################################################################
 
-if [ "${enable_emulator_mame:-true}" == "true" ]; then
+if [ "${enable_emulator_mame:-false}" == "true" ]; then
 
 echo "building MAME..."
 
