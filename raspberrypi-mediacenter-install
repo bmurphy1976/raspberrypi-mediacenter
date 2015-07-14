@@ -48,8 +48,8 @@ DEBIAN_FRONTEND=noninteractive apt-get -y install \
 	ca-certificates \
 	cmake \
 	dstat \
-	g++-4.7 \
-	gcc-4.7 \
+	g++-4.8 \
+	gcc-4.8 \
 	git-core \
 	htop \
 	libapr1 \
@@ -360,29 +360,45 @@ fi
 fi
 
 #############################################################################
+# PlayStation 1
+#############################################################################
+
+if [ "${enable_emulator_pcsx:-true}" == "true" ]; then
+
+if [ ! -f libretro-pcsx_rearmed/Makefile.libretro ]; then
+	git clone --depth 1 https://github.com/notaz/pcsx_rearmed libretro-pcsx_rearmed
+fi
+
+if [ ! -f libretro-pcsx_rearmed/pcsx_rearmed_libretro.so ]; then
+	cd libretro-pcsx_rearmed
+	make -f Makefile.libretro
+	cd ..
+fi
+
+if [ ! -f /usr/local/share/retroarch/emulators/pcsx_rearmed_libretro.so ]; then
+	cp libretro-pcsx_rearmed/pcsx_rearmed_libretro.so /usr/local/share/retroarch/emulators/pcsx_rearmed_libretro.so
+fi
+
+fi
+
+#############################################################################
 # M.A.M.E.
 #############################################################################
 
 if [ "${enable_emulator_mame:-false}" == "true" ]; then
 
-echo "building MAME..."
-
-if [ ! -f libretro-mame/Makefile.libretro ]; then
-	git clone --depth 1 https://github.com/libretro/mame libretro-mame
+if [ ! -f libretro-imame4all/makefile.libretro ] ;then
+	git clone --depth 1 https://github.com/libretro/imame4all-libretro libretro-imame4all
 fi
 
-if [ ! -f libretro-mame/mame_libretro.so ]; then
-	cd libretro-mame
-	# the optimizations for compiling this file cause the device to run out of RAM, so we compile it -O0 instead of -O3
-	if [ ! -f obj/retro/emu/cpu/tms57002/tms57002.o ]; then
-		/usr/bin/g++-4.7 -DCRLF=2 -DINLINE="static inline" -DLSB_FIRST -DNDEBUG  -DUSE_NETWORK -DFLAC__NO_DLL -DLUA_COMPAT_APIINTCASTS -DOSD_RETRO -DNO_USE_MIDI -DNATIVE_DRC=drcbe_x86 -DWANT_MAME  -pipe -Wno-deprecated-declarations -O0 -fno-strict-aliasing  -Wno-unknown-pragmas -Wall -Wformat-security -Wwrite-strings -Wno-sign-compare -Wno-conversion -Wcast-align -Wno-cast-align -include src/osd/retro/retroprefix.h -fPIC -fsigned-char -finline  -fno-common -fno-builtin -fweb -frename-registers -falign-functions=16 -DALIGN_INTS -DALIGN_SHORTS -fstrict-aliasing -fno-merge-constants  -fPIC -DLSB_FIRST  -x c++ -std=gnu++98 -Woverloaded-virtual -fpermissive -I3rdparty/libflac/src/libFLAC/include -Isrc/mame -Iobj/retro/mame/layout -Isrc/emu -Iobj/retro/emu -Iobj/retro/emu/layout -Isrc/lib/util -Isrc/lib -I3rdparty -I3rdparty/lua/src -Isrc/osd -Isrc/osd/retro  -I3rdparty/expat/lib -I3rdparty/zlib -Isrc/lib/util -I3rdparty/libjpeg -Isrc/lib/portmidi -Isrc/osd/retro/libretro-common/include -c src/emu/cpu/tms57002/tms57002.c -o obj/retro/emu/cpu/tms57002/tms57002.o
-	fi
-	make -f Makefile.libretro CC=/usr/bin/g++-4.7 REALCC=/usr/bin/gcc-4.7
+if [ ! -f libretro-imame4all/libretro.so ]; then
+	cd libretro-imame4all
+	make -f makefile.libretro ARM=1
 	cd ..
 fi
 
-if [ ! -f /usr/local/share/retroarch/emulators/mame_libretro.so ]; then
-	cp libretro-mame/mame_libretro.so /usr/local/share/retroarch/emulators/mame_libretro.so
+if [ ! -f /usr/local/share/retroarch/emulators/imame4all_libretro.so ]; then
+	cp libretro-imame4all/libretro.so /usr/local/share/retroarch/emulators/imame4all_libretro.so
 fi
 
 fi
@@ -489,7 +505,7 @@ fi
 
 if [ ! -f emulationstation/Makefile ]; then
 	cd emulationstation
-	cmake -DCMAKE_CXX_COMPILER=/usr/bin/g++-4.7 -DFREETYPE_INCLUDE_DIRS=/usr/include/freetype2/ .
+	cmake -DCMAKE_CXX_COMPILER=/usr/bin/g++-4.8 -DFREETYPE_INCLUDE_DIRS=/usr/include/freetype2/ .
 	cd ..
 fi
 
@@ -536,8 +552,8 @@ apt-get -y remove \
     binutils \
     build-essential \
     cmake \
-    g++-4.7 \
-    gcc-4.7 \
+    g++-4.8 \
+    gcc-4.8 \
     libasound2-dev \
     libboost-date-time-dev \
     libboost-filesystem-dev \
