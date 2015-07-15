@@ -43,6 +43,7 @@ if [ "$enable_rpi_update:-true}" == "true" ]; then
 fi
 
 DEBIAN_FRONTEND=noninteractive apt-get -y install \
+	automake \
 	binutils \
 	build-essential \
 	ca-certificates \
@@ -412,8 +413,10 @@ if [ "${enable_ffmpeg:-true}" == "true" ]; then
 echo "building ffmpeg..."
 
 if [ ! -f ffmpeg/configure ]; then
-	git clone --depth 1 https://github.com/FFmpeg/FFmpeg ffmpeg
+	git clone https://github.com/FFmpeg/FFmpeg ffmpeg
+	cd ffmpeg
 	git checkout n2.7.1
+	cd ..
 fi
 
 if [ ! -f ffmpeg/config.h ]; then
@@ -474,9 +477,9 @@ if [ ! -f omxplayer/prepare-native-raspbian.sh ]; then
 	git clone --depth 1 https://github.com/popcornmix/omxplayer.git omxplayer
 fi
 
-if [ ! -f omxplayer/omxplayer ]; then
+if [ ! -f omxplayer/omxplayer.bin ]; then
 	cd omxplayer
-	sed -i 's/^[^#].*cp -a ffmpeg_compiled.*/#\0/' omxplayer/Makefile
+	sed -i 's/^[^#].*cp -a ffmpeg_compiled.*/#\0/' Makefile
 	./prepare-native-raspbian.sh
 	make
 	cd ..
@@ -549,6 +552,7 @@ if [ "${enable_apt_remove:-true}" == "true" ]; then
 echo "removing packages..."
 
 apt-get -y remove \
+	automake \
     binutils \
     build-essential \
     cmake \
