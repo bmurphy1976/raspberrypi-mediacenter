@@ -252,6 +252,7 @@ if [ ! -f /usr/local/lib/libSDL2_ttf.so ]; then
 	cd SDL2_ttf-2.0.12
 	make install
 	ldconfig
+	cd ..
 fi
 
 #############################################################################
