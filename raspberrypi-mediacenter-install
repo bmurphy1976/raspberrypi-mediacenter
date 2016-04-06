@@ -42,7 +42,7 @@ if [ "$enable_rpi_update:-true}" == "true" ]; then
 	rpi-update
 fi
 
-DEBIAN_FRONTEND=noninteractive apt-get -y install \
+DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
 	automake \
 	binutils \
 	build-essential \
@@ -75,22 +75,22 @@ DEBIAN_FRONTEND=noninteractive apt-get -y install \
 	libfreeimage3 \
 	libfreetype6-dev \
 	libgnutls-openssl27 \
-	libgnutlsxx27 \
+	libgnutlsxx28 \
 	libgssrpc4 \
 	libidn11-dev \
-	libkadm5clnt-mit8 \
-	libkadm5srv-mit8 \
-	libkdb5-6 \
+	libkadm5clnt-mit9 \
+	libkadm5srv-mit9 \
+	libkdb5-7 \
 	libneon27-gnutls \
 	libpcre3-dev \
 	libpcrecpp0 \
 	libpython3.2 \
-	libraw5 \
-	libserf1 \
+	libraw10 \
+	libserf-1-1 \
 	libsmbclient-dev \
 	libssh-dev \
 	libssl-dev \
-	libtasn1-3-dev \
+	libtasn1-6-dev \
 	libudev-dev \
 	libusb-1.0-0-dev \
 	libva1 \
