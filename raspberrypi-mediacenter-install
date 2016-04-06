@@ -49,7 +49,9 @@ DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
 	ca-certificates \
 	cmake \
 	dstat \
+	g++-4.7 \
 	g++-4.8 \
+	gcc-4.7 \
 	gcc-4.8 \
 	git-core \
 	htop \
