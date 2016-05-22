@@ -75,6 +75,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
 	libeigen3-dev \
 	libfreeimage-dev \
 	libfreeimage3 \
+	libfreetype6 \
 	libfreetype6-dev \
 	libgnutls-openssl27 \
 	libgnutlsxx28 \
